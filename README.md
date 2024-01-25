@@ -14,7 +14,7 @@ Ponermos en el hosts el subdominio "http://forum.bart.htb/"  Si vemos la pagina 
 
 Vamos a enumerar en busca de otros subdominios
 
-```
+```bash
  wfuzz -c -t 200  --hc=302,404 -w /usr/share/seclists/Discovery/DNS/deepmagic.com-prefixes-top50000.txt -H "Host: FUZZ.bart.htb"  http://10.129.96.185/
 
 ```
@@ -30,7 +30,7 @@ Si lo revisamos no encontre nada entonces lo que se me ocurre es un ataque de fu
 
 Esto sirve para crear diccionarios en base a las mismas palabras de la pagina.
 
-```
+```bash
 cewl -w cewl-forum.txt -e -a http://forum.bart.htb
 
 ‐e, ‐‐email
@@ -47,7 +47,7 @@ cewl -w cewl-forum.txt -e -a http://forum.bart.htb
 
 Para cambiar de mayusculas a minuculas
 
-```
+```bash
 tr '[:upper:]' '[:lower:]'
 ```
 
@@ -56,7 +56,7 @@ tr '[:upper:]' '[:lower:]'
 
 Esto es una alternativa a hydra para hacer brute force lo que si falta es ponerle hilos para que vaya mas rapido
 
-```
+```python
 #!/usr/bin/python3
 
 import requests, pdb, sys, time, re, signal
