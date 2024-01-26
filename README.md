@@ -106,15 +106,32 @@ if __name__ == '__main__':
 
 ```
 
+COn el output de cewl y poniendo todo en minusculas sacamos el password
+
+```
+harvey
+
+potter
+```
+
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/e3da1420-e251-40b5-bbf2-b5ced1ed2c9b)
+
+Siemmpre ve si el proyecto es open source en este caso si.
+
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/5b4852f0-526c-4c36-8e91-61fec50ae625)
 
 
+Pues yo no hubiera podido ver esto solo pero si intentamos registranos de acuerdo al codigo.
 
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/371da5fe-0627-4863-9074-ccb5c9ae1516)
 
+```
+curl -X POST http://internal-01.bart.htb/simple_chat/login_form.php -d "uname=masa&password=masa1234"
+```
 
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/aa59b77e-66eb-4861-b411-2756aabec176)
 
-
-
-
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/3ac269b9-79e1-40b5-8f32-24b3c626d805)
 
 
 
